@@ -9,7 +9,6 @@ alternvative_api_url = "https://juno-rest.publicnode.com/cosmos/gov/v1beta1/prop
 possible_status = ["PROPOSAL_STATUS_PASSED","PROPOSAL_STATUS_REJECTED","PROPOSAL_STATUS_VOTING_PERIOD"]
 
 def governor (proposal_id): 
-    print (proposal_id)
     formatted_api_url = api.format(proposal_id=proposal_id)
     formatted_status_api = status_api.format(proposal_id=proposal_id)
 
@@ -21,7 +20,7 @@ def governor (proposal_id):
 
         response = requests.get(formatted_api_url)
         
-        # Process the response or perform other actions as needed
+  
         if response.status_code == 429: #rate limited again 
             return ("Try again is some time! Facing problems at the moment...😿")
     
