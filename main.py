@@ -1,31 +1,46 @@
 import telebot
 from poll import governor
 from message_builder import Message_builder
-bot = telebot.TeleBot("[TELEGRAM BOT TOKEN]", parse_mode='Markdown') # You can set parse_mode by default. HTML or MARKDOWN
+
+
+bot = telebot.TeleBot("[TELEGRAM BOT TOKEN]", parse_mode='Markdown')
 
 @bot.message_handler(commands=['stats'])
 def send_stats(message):
-	name = message.from_user.first_name
+
+ #for log history purposes only 
+	name = message.from_user.first_name 
 	print (f'Stats asked by {name}')
-	text = Message_builder()
-	print (text)
-	bot.reply_to(message, text)
-	print ("Stats provided ✅")
+
+ #getting the full text posted on telegram
+ try:
+	    text = Message_builder()
+	    bot.reply_to(message, text)
+	    print ("Stats provided ✅")
+ except:
+     print ("Problem providing stats")
+
 
 
 @bot.message_handler(commands=['prop'])
 def send_stats(message):
 	name = message.from_user.first_name
 	content = message.text
+
+ #removing the "prop" from f.ex "/prop 16" 
 	result = content.replace("/prop ","")
 
+#making sure it's /prop + proposal id
 	try:
 		int(result)
 		flag = True
+
+#if it's not, the bot sends a message to the user
 	except:
 		bot.reply_to(message,"Enter /prop + [proposal id]")
 		flag = False
 
+ #if the command is correct 
 	if flag ==  True: 
 		data = governor(result)
 		bot.reply_to(message,data)
