@@ -1,7 +1,7 @@
 from data import Juno
 def Message_builder():
     juno =  Juno()
-    text =  f"""
+    return f"""
 🌕 *Τιμή Juno*: $ {juno.price:.2f}
 🥩 *Staking APR*: {int(juno.apr*100)}%
 🌱 *Πληθωρισμός*: {juno.inflation*100}%
@@ -10,5 +10,3 @@ def Message_builder():
 
 _Από την κοινότητα του Juno Greece_
 """
-    
-    return text
